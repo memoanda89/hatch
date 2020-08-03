@@ -28,7 +28,32 @@ const reducerTareas = (state = initialState, action) => {
         }
     }
 
+    if (action.type === "FILTRA_TAREA_ACTIVA") {
 
+        var listRep=state.TodoList;
+     return {
+            ...state,
+            TodoListArray: listRep.filter(j => j.estatus === "Activo"),
+        }
+    }
+
+    if (action.type === "FILTRA_TAREA_COMPLETO") {
+        var listRep=state.TodoList;
+        return {
+               ...state,
+               TodoListArray: listRep.filter(j => j.estatus === "Completo"),
+           }
+       }
+       if (action.type === "FILTRA_TAREA_TODOS") {
+
+      
+        var listRep=state.TodoList;
+      
+        return {
+               ...state,
+               TodoListArray:listRep.filter(j => j.estatus !== "Cancelado"),
+           }
+       }
 
     return state
 }
