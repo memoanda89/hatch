@@ -6,81 +6,81 @@ import TodoItem from '../TodoItem';
 import ButtonGroup from '@material-ui/core/ButtonGroup';
 import Button from '@material-ui/core/Button';
 import { connect } from "react-redux";
-const TodoList = ({ TodoListArray, FiltraTodos, FiltraActivos, FiltraCompleto, editItem }) => {
+const TodoList = ({TodoListArray,FiltraTodos,FiltraActivos,FiltraCompleto,editItem}) =>{ 
 
 
-    return (
-        <div >
-            <Grid container spacing={3} >
-                <Grid item xs={12} className="App">
-                    <h1> Lista de tareas</h1>
-                </Grid>
-                <Grid item xs={12} className="App">
-                    <ButtonGroup size="large" color="primary" aria-label="large outlined primary button group">
-                        <Button onClick={() => FiltraTodos()}>Todos</Button>
-                        <Button onClick={() => FiltraActivos()}>Activos</Button>
-                        <Button onClick={() => FiltraCompleto()}>Completos</Button>
+ return (
+     <div >
+        <Grid container spacing={3} >
+            <Grid item xs={12} className="App">
+                <h1> Lista de tareas</h1>
+            </Grid>
+            <Grid item xs={12} className="App">
+                <ButtonGroup size="large" color="primary" aria-label="large outlined primary button group">
+                    <Button  onClick={() => FiltraTodos()}>Todos</Button>
+                    <Button  onClick={() => FiltraActivos()}>Activos</Button>
+                    <Button  onClick={() => FiltraCompleto()}>Completos</Button>
 
-                    </ButtonGroup>
-                </Grid>
-                <Grid item xs={12}>
-                    <Grid container spacing={3}>
-                        <Grid item xs={12}>
-                            <div >
-                                {
-                                    TodoListArray.map(todo => (
-                                        <TodoItem key={todo.id}
-                                            {...todo} editItem={editItem} />
-
-                                    ))
-                                }
-                            </div>
-                        </Grid>
+                </ButtonGroup>
+            </Grid>
+            <Grid item xs={12}>
+                <Grid container spacing={3}>
+                    <Grid item xs={12}>
+                    <div >
+                        {
+                            TodoListArray.map(todo => (
+                                <TodoItem  key={todo.id}
+                                {...todo} editItem={editItem}/>
+                                        
+                            ))
+                        }
+                        </div>
                     </Grid>
                 </Grid>
-
-
             </Grid>
-        </div>
+
+
+        </Grid>
+    </div>
     )
-}
+ }
 
 
 const mapStateToProps = state => ({
     TodoListArray: state.TodoListArray
-})
-
-const mapDispatchToProps = dispatch => ({
+  })
+  
+  const mapDispatchToProps = dispatch => ({
     agregarTitular(TodoItem) {
-        dispatch({
-            type: "AGREGAR_TAREA",
-            TodoItem
-        })
+      dispatch({
+        type: "AGREGAR_TAREA",
+        TodoItem
+      })
     },
     FiltraTodos() {
-        console.log("distacc");
+       
         dispatch({
-            type: "FILTRA_TAREA_TODOS"
-
+          type: "FILTRA_TAREA_TODOS"
+          
         })
-    },
-
-    FiltraActivos() {
+      },
+   
+      FiltraActivos() {
         dispatch({
-            type: "FILTRA_TAREA_ACTIVA",
-
+          type: "FILTRA_TAREA_ACTIVA",
+         
         })
-    },
-
-    FiltraCompleto() {
+      },
+     
+      FiltraCompleto() {
         dispatch({
-            type: "FILTRA_TAREA_COMPLETO",
-
+          type: "FILTRA_TAREA_COMPLETO",
+          
         })
-    },
-
-
-
-})
-
-export default connect(mapStateToProps, mapDispatchToProps)(TodoList)
+      },
+     
+   
+    
+  })
+  
+  export default connect(mapStateToProps, mapDispatchToProps)(TodoList)
