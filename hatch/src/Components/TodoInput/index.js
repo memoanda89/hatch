@@ -19,13 +19,9 @@ const TodoInput = ({ TodoListArray, dispatch, agregarTarea }) => {
                 agregarTarea(input.value)
                 input.value = ''
             }}>
-
-
-              
                 <label>Descripcion Tarea </label>
                 <br />
                 <input ref={node => input = node} className="NuevaTarea" />
-
                 <br />
                 <Button variant="contained" color="primary" type="submit" >
                 agregar tarea
@@ -38,9 +34,11 @@ const mapStateToProps = state => ({
     TodoListArray: state.TodoListArray
 })
 
+
+
 const mapDispatchToProps = dispatch => ({
     agregarTarea(text) {
-console.log("Entro");
+
             dispatch({
                 type: "AGREGAR_TAREA",
                 text

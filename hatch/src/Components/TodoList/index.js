@@ -5,38 +5,64 @@ import Grid from '@material-ui/core/Grid';
 import TodoItem from '../TodoItem';
 import ButtonGroup from '@material-ui/core/ButtonGroup';
 import Button from '@material-ui/core/Button';
+import { connect } from "react-redux";
+const TodoList = ({TodoListArray,FiltraTodos,FiltraActivos,FiltraCompleto,editItem}) =>{ 
 
-const TodoList = ( ) => (
-  
-   <div >
+
+ return (
+     <div >
         <Grid container spacing={3} >
-        <Grid item xs={12} className="App">
-           <h1> Lista de tareas</h1>
-           </Grid>
-           <Grid item xs={12} className="App">
-           <ButtonGroup size="large" color="primary" aria-label="large outlined primary button group">
-  <Button>Todos</Button>
-  <Button>Activos</Button>
-  <Button>Completos</Button>
- 
-</ButtonGroup>
-           </Grid>
-        <Grid item xs={12}>
+            <Grid item xs={12} className="App">
+                <h1> Lista de tareas</h1>
+            </Grid>
+            <Grid item xs={12} className="App">
+                <ButtonGroup size="large" color="primary" aria-label="large outlined primary button group">
+                    <Button  >Todos</Button>
+                    <Button >Activos</Button>
+                    <Button >Completos</Button>
+
+                </ButtonGroup>
+            </Grid>
+            <Grid item xs={12}>
                 <Grid container spacing={3}>
                     <Grid item xs={12}>
-                    <TodoItem/>
-                    <br/>
-                    <TodoItem/>
-                    <br/>
-                    <TodoItem/>
+                    <div >
+                        {
+                            TodoListArray.map(todo => (
+                                <TodoItem  key={todo.id}
+                                {...todo} editItem={editItem}/>
+                                
+                                        
+                            ))
+
+                        }
+                        </div>
                     </Grid>
                 </Grid>
-                </Grid>
-      
-       
+            </Grid>
+
+
         </Grid>
     </div>
-)
+    )
+ }
 
 
-export default TodoList
+const mapStateToProps = state => ({
+    TodoListArray: state.TodoListArray
+  })
+  
+  const mapDispatchToProps = dispatch => ({
+    agregarTitular(TodoItem) {
+      dispatch({
+        type: "AGREGAR_TAREA",
+        TodoItem
+      })
+    },
+  
+     
+   
+    
+  })
+  
+  export default connect(mapStateToProps, mapDispatchToProps)(TodoList)
